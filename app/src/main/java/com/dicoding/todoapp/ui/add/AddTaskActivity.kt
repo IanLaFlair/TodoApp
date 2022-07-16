@@ -50,10 +50,14 @@ class AddTaskActivity : AppCompatActivity(), DatePickerFragment.DialogDateListen
 
     fun insertTask(title: String, description: String, duedatemills: Long){
         val task: Task?
-        task = Task(0,title,description,dueDateMillis,false)
-        addTaskViewModel.insert(task)
-        Toast.makeText(applicationContext, "Success Add New Task", Toast.LENGTH_SHORT).show()
-        finish()
+        if (title.isEmpty() || description.isEmpty() || duedatemills.equals(0)){
+            Toast.makeText(this, "Silakan isi field terlebih dahulu", Toast.LENGTH_SHORT).show()
+        }else{
+            task = Task(0,title,description,dueDateMillis,false)
+            addTaskViewModel.insert(task)
+            Toast.makeText(applicationContext, "Success Add New Task", Toast.LENGTH_SHORT).show()
+            finish()
+        }
     }
 
     fun showDatePicker(view: View) {
